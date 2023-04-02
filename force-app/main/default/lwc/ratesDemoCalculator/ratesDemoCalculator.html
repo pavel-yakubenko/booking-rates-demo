@@ -1,0 +1,30 @@
+<template>
+    <lightning-card  title="Booking Calculator">
+        <p class="slds-p-horizontal_small">
+            <!-- Room type selection -->
+            <lightning-combobox
+                name="roomTypeSelected"
+                label="Room Type"
+                value={roomTypeSelected}
+                placeholder="Select Room Type"
+                options={roomTypes}
+                onchange={handleChange}
+            ></lightning-combobox>
+            <!-- guest count -->
+            <lightning-input
+                type="number" name="guestCount" label="Enter guests count" value={guestCount} onchange={handleChange}
+            ></lightning-input>
+            <!-- period -->
+            <lightning-input type="date" name="startDate" label="Enter a start date" value={startDate} onchange={handleChange}></lightning-input>
+            <lightning-input type="date" name="endDate" label="Enter an end date"  value={endDate} onchange={handleChange} class="slds-m-bottom_x-small"></lightning-input>
+            <!-- guest type -->
+            <!-- submit -->
+            <lightning-button variant="brand" label="Calculate" title="Calculate rate" onclick={handleCalculate}></lightning-button>
+        </p>
+        <p slot="footer">
+            <template if:true={bookingSummary}>
+                Booking summary: {bookingSummary}
+            </template>
+        </p>
+    </lightning-card>       
+</template>
