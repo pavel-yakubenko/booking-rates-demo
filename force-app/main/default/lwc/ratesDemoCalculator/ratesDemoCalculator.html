@@ -1,8 +1,9 @@
 <template>
     <lightning-card  title="Booking Calculator">
-        <p class="slds-p-horizontal_small">
+        <div class="slds-var-p-horizontal_small">
             <!-- Room type selection -->
             <lightning-combobox
+                class="slds-size_medium"
                 name="roomTypeSelected"
                 label="Room Type"
                 value={roomTypeSelected}
@@ -12,19 +13,38 @@
             ></lightning-combobox>
             <!-- guest count -->
             <lightning-input
-                type="number" name="guestCount" label="Enter guests count" value={guestCount} onchange={handleChange}
+                type="number" name="guestCount" label="Guests count" value={guestCount} onchange={handleChange} class="slds-size_medium"
             ></lightning-input>
             <!-- period -->
-            <lightning-input type="date" name="startDate" label="Enter a start date" value={startDate} onchange={handleChange}></lightning-input>
-            <lightning-input type="date" name="endDate" label="Enter an end date"  value={endDate} onchange={handleChange} class="slds-m-bottom_x-small"></lightning-input>
+            <div class="slds-grid slds-size_medium">
+                <div class="slds-col">
+                    <lightning-input type="date" name="startDate" label="Start date" value={startDate} onchange={handleChange} class="slds-var-m-right_x-small"></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="date" name="endDate" label="End date"  value={endDate} onchange={handleChange} class="slds-var-m-right_x-small"></lightning-input>
+                </div>
+            </div>
             <!-- guest type -->
+            <lightning-combobox
+                class="slds-size_medium"
+                name="guestTypeSelected"
+                label="Guest Type"
+                value={guestTypeSelected}
+                placeholder="Select Guest Type"
+                options={guestTypes}
+                onchange={handleChange}
+            ></lightning-combobox>
             <!-- submit -->
-            <lightning-button variant="brand" label="Calculate" title="Calculate rate" onclick={handleCalculate}></lightning-button>
-        </p>
-        <p slot="footer">
+            <div class="slds-var-m-top_x-small">
+                <lightning-button variant="brand" label="Calculate" title="Calculate rate" onclick={handleCalculate}></lightning-button>
+            </div>
+            
+        </div>
+        <div slot="footer">
             <template if:true={bookingSummary}>
-                Booking summary: {bookingSummary}
+                <div>Booking summary: </div>
+                <div>{bookingSummary}</div>
             </template>
-        </p>
+        </div>
     </lightning-card>       
 </template>

@@ -1,26 +1,28 @@
-import { LightningElement, track } from 'lwc';
-
-const ROOM_TYPES = [
-    {label: 'Standard', value: 'standard'},
-    {label: 'Luxury', value: 'luxury'},
-];
+import { LightningElement, track, api } from 'lwc';
 
 export default class RatesDemoCalculator extends LightningElement {
 
-    roomTypeSelected = ROOM_TYPES[0].value;
-    guestCount = 1;
+    @api roomTypes;
+    @api guestTypes;
+    roomTypeSelected;
+    guestTypeSelected;
+    guestCount;
     startDate;
     endDate;
+    guestType;
     @track bookingSummary;
 
-    get roomTypes() {
-        return ROOM_TYPES;
+    connectedCallback() {
+        this.roomTypeSelected = this.roomTypes[0].value;
+        this.guestTypeSelected = this.guestTypes[0].value;
     }
 
     getBookingSummary() {
-        return ''+
-        'Room type = '+ROOM_TYPES.find( e => e.value == this.roomTypeSelected ).label+'; '+
-        'Guests = '+this.guestCount+'; '+
+        return '' +
+        'Room type = ' + this.roomTypes.find( e => e.value == this.roomTypeSelected ).label + '; ' +
+        'Guests = ' + this.guestCount + '; ' +
+        'Period = ' + this.startDate + ' - ' + this.endDate +'; '+
+        'Guest type = ' + this.guestTypes.find( e => e.value == this.guestTypeSelected ).label + '; ' +
         '';
     }
 
