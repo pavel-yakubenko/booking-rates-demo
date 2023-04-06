@@ -1,23 +1,32 @@
 <template>
     <!-- Region with settings -->
     <lightning-card  title="Rates Settings">
-        <p class="slds-p-horizontal_small">
+        <div class="slds-p-horizontal_small">
             <!-- Card Body -->
             <!-- tabset -->
             <lightning-tabset variant="scoped">
                 <lightning-tab label="Capacity Rates">
-                    <c-rates-demo-controller-capacity></c-rates-demo-controller-capacity>
+                    <c-rates-demo-settings
+                        table-data={capacityControllerData}
+                        table-columns={capacityControllerColumns}
+                    ></c-rates-demo-settings>
                 </lightning-tab>
-                <lightning-tab label="Item Two">
-                    Two Content !
+                <lightning-tab label="Stay Rates">
+                    <c-rates-demo-settings
+                        table-data={capacityControllerData}
+                        table-columns={capacityControllerColumns}
+                    ></c-rates-demo-settings>
                 </lightning-tab>
-                <lightning-tab label="Item Three">
-                    Three Content !
+                <lightning-tab label="Date Rates">
+                    <c-rates-demo-settings
+                        table-data={capacityControllerData}
+                        table-columns={capacityControllerColumns}
+                    ></c-rates-demo-settings>
                 </lightning-tab>
             </lightning-tabset>    
-        </p>
+        </div>
     </lightning-card>    
-    <!-- Calculator Card -->
+    <!-- Calculator Card -->  
     <c-rates-demo-calculator
         room-types={roomTypes}
         guest-types={guestTypes}

@@ -12,9 +12,37 @@ const GUEST_TYPES = [
     {label: 'Group', value: 'group'},
 ];
 
+const CONTROLLER_TABLE_ACTIONS = [
+    { label: 'Edit', name: 'edit' },
+    { label: 'Copy', name: 'copy' },
+    { label: 'Delete', name: 'delete' },
+];
+
+const CAPACITY_CONTROLLER_COLUMNS = [
+    { label: 'Room Type', fieldName: 'roomType' },
+    { label: 'Guest Count', fieldName: 'guestCount', type: 'number' },
+    { label: 'Rate', fieldName: 'rate', type: 'percent' },
+    {
+        type: 'action',
+        typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
+    },
+];
+
+const CAPACITY_CONTROLLER_DATA = [
+    {id: '0', roomType: 'Default', guestCount: 1, rate: -0.1},
+    {id: '1', roomType: 'Default', guestCount: 2, rate: 0},
+    {id: '2', roomType: 'Default', guestCount: 3, rate: 0.1},
+    {id: '3', roomType: 'Default', guestCount: 4, rate: 0.15},
+    {id: '4', roomType: 'Standard', guestCount: 1, rate: -0.15},
+    {id: '5', roomType: 'Standard', guestCount: 3, rate: 0.2},
+    {id: '6', roomType: 'Luxury', guestCount: 4, rate: 0.25},
+];
+
 export default class RatesDemoContainer extends LightningElement {
 
     roomTypes = ROOM_TYPES;
     guestTypes = GUEST_TYPES;
+    capacityControllerColumns = CAPACITY_CONTROLLER_COLUMNS;
+    capacityControllerData = CAPACITY_CONTROLLER_DATA;
 
 }
