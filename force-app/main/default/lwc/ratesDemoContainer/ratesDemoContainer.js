@@ -28,6 +28,13 @@ const CAPACITY_CONTROLLER_COLUMNS = [
     },
 ];
 
+const CAPACITY_CONTROLLER_FIELDS = [
+    { isPicklist: true, name: 'roomType', label: 'Room Type', type: '', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
+    { isInput: true, name: 'guestCount', label: 'Guest Count', type: 'number', value: 1, options: undefined },
+    { isInput: true, name: 'rate', label: 'Rate', type: 'percent', value: 0, options: undefined },
+];
+
+
 const CAPACITY_CONTROLLER_DATA = [
     {id: '0', roomType: 'Default', guestCount: 1, rate: -0.1},
     {id: '1', roomType: 'Default', guestCount: 2, rate: 0},
@@ -44,5 +51,6 @@ export default class RatesDemoContainer extends LightningElement {
     guestTypes = GUEST_TYPES;
     capacityControllerColumns = CAPACITY_CONTROLLER_COLUMNS;
     capacityControllerData = CAPACITY_CONTROLLER_DATA;
+    capacityControllerFields = CAPACITY_CONTROLLER_FIELDS;
 
 }

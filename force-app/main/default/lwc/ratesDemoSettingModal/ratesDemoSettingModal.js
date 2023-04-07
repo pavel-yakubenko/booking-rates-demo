@@ -3,42 +3,23 @@ import LightningModal from 'lightning/modal';
 
 export default class RatesDemoSettingModal extends LightningModal {
     @api label;
-    // @api fields;
-    fields = [
-        {
-            isPicklist: true,
-            name: 'picklist',
-            label: 'Picklist',
-            type: '',
-            value: 'luxury',
-            options: [
-                {label: 'Standard', value: 'standard'},
-                {label: 'Luxury', value: 'luxury'},
-            ],
-        },
-        {
-            isInput: true,
-            name: 'input',
-            label: 'Input',
-            type: 'date',
-            value: '',
-            options: [],
-        },
-    ];
-
-    fieldsChanged = {};
+    @api fields;
+    @api record; // {id: this.nextIndex++, roomType: result.roomType, guestCount: result.guestCount, rate: 0}
 
     handleSave() {
-        this.close('save');
+        this.close(record);
     }
 
     handleCancel() {
-        this.close('cancel');
+        this.close(undefined);
     }
 
     handleChange( event ) {
-
-        this.fieldsChanged[event.target.name] = event.target.value;
+        console.log( 'record before ---------');
+        console.log( this.record );
+        this.record[event.target.name] = event.target.value;
+        console.log( 'record after ---------');
+        console.log( this.record );
     }
 
 }

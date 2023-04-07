@@ -5,6 +5,7 @@ export default class RatesDemoControllerCapacity extends LightningElement {
 
     @api tableData;
     @api tableColumns;
+    @api recordFields;
     nextIndex = 0;
 
     connectedCallback() {
@@ -33,24 +34,53 @@ export default class RatesDemoControllerCapacity extends LightningElement {
     }
 
     async addRow( event ) {
-        // this.tableData = this.tableData.concat( {id: this.nextIndex++, roomType: 'Default', guestCount: 0, rate: 0} );
+        const row = {};
+        for (const field of this.recordFields) {
+            row[field.name] = field.value;
+        }
+
+        console.log( 'Open modal with row ' );
+        console.log( row );
+        console.log( JSON.stringify( row ) );
+
         const result = await RatesDemoSettingModal.open({
             label: 'New rate',
+            fields: this.recordFields,
+            record: row,
         });
+
+        if( result ) {
+            result.id = this.nextIndex++;
+            this.tableData = this.tableData.concat( result );
+        }
     }
 
-    async editRow( event ) {
-        // this.tableData = this.tableData.concat( {id: this.nextIndex++, roomType: 'Default', guestCount: 0, rate: 0} );
+    async editRow( row ) {
+        console.log( 'Open modal with row ' );
+        console.log( row );
+        console.log( JSON.stringify( row ) );
         const result = await RatesDemoSettingModal.open({
             label: 'Edit rate',
+            fields: this.recordFields,
+            record: row,
         });
+
+        if( result ) {
+            // find row by id, update its values
+        }
     }
 
-    async copyRow( event ) {
-        // this.tableData = this.tableData.concat( {id: this.nextIndex++, roomType: 'Default', guestCount: 0, rate: 0} );
+    async copyRow( row ) {
         const result = await RatesDemoSettingModal.open({
-            label: 'New prefilled rate',
+            label: 'Edit rate',
+            fields: this.recordFields,
+            record: row,
         });
+
+        if( result ) {
+            result.id = this.nextIndex++;
+            this.tableData = this.tableData.concat( result );
+        }
     }
 
 }
