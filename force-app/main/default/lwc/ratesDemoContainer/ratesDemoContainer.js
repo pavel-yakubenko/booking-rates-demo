@@ -1,15 +1,16 @@
 import { LightningElement } from 'lwc';
 
 const ROOM_TYPES = [
-    {label: 'Standard', value: 'standard'},
-    {label: 'Luxury', value: 'luxury'},
+    {label: 'Default', value: 'Default'},
+    {label: 'Standard', value: 'Standard'},
+    {label: 'Luxury', value: 'Luxury'},
 ];
 
 const GUEST_TYPES = [
-    {label: 'Standard', value: 'standard'},
-    {label: 'Employee', value: 'employee'},
-    {label: 'Disabled', value: 'disabled'},
-    {label: 'Group', value: 'group'},
+    {label: 'Standard', value: 'Standard'},
+    {label: 'Employee', value: 'Employee'},
+    {label: 'Disabled', value: 'Disabled'},
+    {label: 'Group', value: 'Group'},
 ];
 
 const CONTROLLER_TABLE_ACTIONS = [
@@ -31,7 +32,7 @@ const CAPACITY_CONTROLLER_COLUMNS = [
 const CAPACITY_CONTROLLER_FIELDS = [
     { isPicklist: true, name: 'roomType', label: 'Room Type', type: '', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
     { isInput: true, name: 'guestCount', label: 'Guest Count', type: 'number', value: 1, options: undefined },
-    { isInput: true, name: 'rate', label: 'Rate', type: 'percent', value: 0, options: undefined },
+    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent', step: '0.01', value: 0, options: undefined },
 ];
 
 

@@ -4,10 +4,16 @@ import LightningModal from 'lightning/modal';
 export default class RatesDemoSettingModal extends LightningModal {
     @api label;
     @api fields;
-    @api record; // {id: this.nextIndex++, roomType: result.roomType, guestCount: result.guestCount, rate: 0}
+    record = {};
 
     handleSave() {
-        this.close(record);
+        // fill in absent object properties corresponding to fields
+        for ( const field of this.fields ) {
+            if ( this.record[ field.name ] === undefined ) {
+                this.record[ field.name ] = field.value; // this value was not changed by user. set default
+            }
+        }
+        this.close(this.record);
     }
 
     handleCancel() {
@@ -15,11 +21,7 @@ export default class RatesDemoSettingModal extends LightningModal {
     }
 
     handleChange( event ) {
-        console.log( 'record before ---------');
-        console.log( this.record );
         this.record[event.target.name] = event.target.value;
-        console.log( 'record after ---------');
-        console.log( this.record );
     }
 
 }

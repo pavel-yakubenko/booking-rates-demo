@@ -33,54 +33,63 @@ export default class RatesDemoControllerCapacity extends LightningElement {
         }
     }
 
-    async addRow( event ) {
-        const row = {};
-        for (const field of this.recordFields) {
-            row[field.name] = field.value;
-        }
-
-        console.log( 'Open modal with row ' );
-        console.log( row );
-        console.log( JSON.stringify( row ) );
-
-        const result = await RatesDemoSettingModal.open({
-            label: 'New rate',
-            fields: this.recordFields,
-            record: row,
-        });
-
-        if( result ) {
-            result.id = this.nextIndex++;
-            this.tableData = this.tableData.concat( result );
-        }
-    }
-
     async editRow( row ) {
-        console.log( 'Open modal with row ' );
-        console.log( row );
-        console.log( JSON.stringify( row ) );
+        const fields = this.getFieldsForModal( row );
         const result = await RatesDemoSettingModal.open({
             label: 'Edit rate',
-            fields: this.recordFields,
-            record: row,
+            fields: fields,
         });
 
         if( result ) {
             // find row by id, update its values
+            result.id = row.id;
+            const index = this.tableData.findIndex( item => item.id == row.id );
+            const rows = this.tableData.slice(); // copy of table data
+            rows.splice( index, 1, result ); // update index
+            this.tableData = rows; // assign new data to table data
         }
     }
 
-    async copyRow( row ) {
+    async addRow( event ) {
+        const fields = this.getFieldsForModal();
+        
         const result = await RatesDemoSettingModal.open({
-            label: 'Edit rate',
-            fields: this.recordFields,
-            record: row,
+            label: 'New rate',
+            fields: fields,
         });
 
         if( result ) {
             result.id = this.nextIndex++;
-            this.tableData = this.tableData.concat( result );
+            this.tableData = this.tableData.concat( JSON.parse( JSON.stringify( result ) ) );
         }
+    }
+
+    async copyRow( row ) {
+        const fields = this.getFieldsForModal( row );
+        
+        const result = await RatesDemoSettingModal.open({
+            label: 'Edit rate',
+            fields: fields,
+        });
+
+        if( result ) {
+            if( result ) {
+                result.id = this.nextIndex++;
+                this.tableData = this.tableData.concat( JSON.parse( JSON.stringify( result ) ) );
+            }
+        }
+    }
+
+    getFieldsForModal( row ) {
+        const fields = JSON.parse( JSON.stringify( this.recordFields ) );
+        if( row ) {
+            for ( const field of fields ) {
+                if ( row[ field.name ] ) {
+                    field.value = row[ field.name ];
+                }
+            }
+        }
+        return fields;
     }
 
 }
