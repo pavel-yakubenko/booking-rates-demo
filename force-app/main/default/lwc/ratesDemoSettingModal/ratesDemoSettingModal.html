@@ -2,6 +2,18 @@
     <lightning-modal-header label={label}></lightning-modal-header>
     <lightning-modal-body>
         <template for:each={fields} for:item="field">
+            <template if:true={field.isMultiPicklist}>
+                <lightning-dual-listbox
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    value={field.value}
+                    source-label="Available"
+                    selected-label="Selected"
+                    options={field.options}
+                    onchange={handleChange}
+                ></lightning-dual-listbox>            
+            </template>
             <template if:true={field.isPicklist}>
                 <lightning-combobox
                     key={field.name}

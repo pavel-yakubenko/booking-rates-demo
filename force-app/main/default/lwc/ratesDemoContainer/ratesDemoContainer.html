@@ -12,18 +12,25 @@
                         record-fields={capacityControllerFields}
                     ></c-rates-demo-settings>
                 </lightning-tab>
-                <lightning-tab label="Stay Rates">
+                <lightning-tab label="Term Rates">
                     <c-rates-demo-settings
-                        table-data={capacityControllerData}
-                        table-columns={capacityControllerColumns}
-                        record-fields={capacityControllerFields}
+                        table-data={termControllerData}
+                        table-columns={termControllerColumns}
+                        record-fields={termControllerFields}
                     ></c-rates-demo-settings>
                 </lightning-tab>
-                <lightning-tab label="Date Rates">
+                <lightning-tab label="Period Rates">
                     <c-rates-demo-settings
-                        table-data={capacityControllerData}
-                        table-columns={capacityControllerColumns}
-                        record-fields={capacityControllerFields}
+                        table-data={periodControllerData}
+                        table-columns={periodControllerColumns}
+                        record-fields={periodControllerFields}
+                    ></c-rates-demo-settings>
+                </lightning-tab>
+                <lightning-tab label="Guest Type Rates">
+                    <c-rates-demo-settings
+                        table-data={guestTypeControllerData}
+                        table-columns={guestTypeControllerColumns}
+                        record-fields={guestTypeControllerFields}
                     ></c-rates-demo-settings>
                 </lightning-tab>
             </lightning-tabset>    

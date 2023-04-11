@@ -85,7 +85,11 @@ export default class RatesDemoControllerCapacity extends LightningElement {
         if( row ) {
             for ( const field of fields ) {
                 if ( row[ field.name ] ) {
-                    field.value = row[ field.name ];
+                    if ( field.isMultiPicklist ) {
+                        field.value = row[ field.name ].split(',');
+                    } else {
+                        field.value = row[ field.name ];
+                    }
                 }
             }
         }

@@ -12,6 +12,10 @@ export default class RatesDemoSettingModal extends LightningModal {
             if ( this.record[ field.name ] === undefined ) {
                 this.record[ field.name ] = field.value; // this value was not changed by user. set default
             }
+            // convert multi picklist values to string
+            if ( field.isMultiPicklist  ) {
+                this.record[ field.name ] = this.record[ field.name ].join();
+            }
         }
         this.close(this.record);
     }
