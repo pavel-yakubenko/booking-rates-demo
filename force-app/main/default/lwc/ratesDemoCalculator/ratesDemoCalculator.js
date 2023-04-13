@@ -9,21 +9,23 @@ export default class RatesDemoCalculator extends LightningElement {
     guestCount;
     startDate;
     endDate;
-    guestType;
-    @track bookingSummary;
+    // guestType;
+    @api bookingSummary;
 
     connectedCallback() {
         this.roomTypeSelected = this.roomTypes[0].value;
         this.guestTypeSelected = this.guestTypes[0].value;
     }
 
-    getBookingSummary() {
-        return '' +
-        'Room type = ' + this.roomTypes.find( e => e.value == this.roomTypeSelected ).label + '; ' +
-        'Guests = ' + this.guestCount + '; ' +
-        'Period = ' + this.startDate + ' - ' + this.endDate +'; '+
-        'Guest type = ' + this.guestTypes.find( e => e.value == this.guestTypeSelected ).label + '; ' +
-        '';
+    getBookingProperties() {
+        const prop = {
+            roomType: this.roomTypeSelected,
+            guestType: this.guestTypeSelected,
+            guestCount: this.guestCount,
+            startDate: this.startDate,
+            endDate: this.endDate,
+        };
+        return prop;
     }
 
     handleChange( event ) {
@@ -31,7 +33,13 @@ export default class RatesDemoCalculator extends LightningElement {
     }
 
     handleCalculate(event) {
-        this.bookingSummary = this.getBookingSummary();
+        // send event to container with booking patam
+        const detail = this.getBookingProperties();
+        const calculateEvent = new CustomEvent(
+            'calculate',
+            { detail: detail }
+        );
+        this.dispatchEvent(calculateEvent);        
     }
 
 

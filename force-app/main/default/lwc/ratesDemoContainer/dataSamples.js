@@ -29,6 +29,29 @@ const CONTROLLER_TABLE_ACTIONS = [
 ];
 
 // -----------------------------------
+// basic prices
+
+export const PRICE_COLUMNS = [
+    { label: 'Room Type', fieldName: 'roomType' },
+    { label: 'Price', fieldName: 'price', type: 'number' },
+    {
+        type: 'action',
+        typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
+    },
+];
+
+export const PRICE_FIELDS = [
+    { isPicklist: true, name: 'roomType', label: 'Room Type', type: '', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
+    { isInput: true, name: 'price', label: 'Price', type: 'number', value: 0 },
+];
+
+
+export const PRICE_DATA = [
+    {id: '0', roomType: 'Standard', price: 100},
+    {id: '1', roomType: 'Luxury', price: 200},
+];
+
+// -----------------------------------
 // capacity rates
 
 export const CAPACITY_CONTROLLER_COLUMNS = [
@@ -58,31 +81,6 @@ export const CAPACITY_CONTROLLER_DATA = [
     {id: '6', roomType: 'Luxury', guestCount: 4, rate: 0.25},
 ];
 
-// // -----------------------------------
-// // term rates
-
-// export const TERM_CONTROLLER_COLUMNS = [
-//     { label: 'Room Type', fieldName: 'roomType' },
-//     { label: 'Max Term', fieldName: 'maxTerm', type: 'number' },
-//     { label: 'Rate', fieldName: 'rate', type: 'percent' },
-//     {
-//         type: 'action',
-//         typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
-//     },
-// ];
-
-// export const TERM_CONTROLLER_FIELDS = [
-//     { isPicklist: true, name: 'roomType', label: 'Room Type', type: '', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
-//     { isInput: true, name: 'maxTerm', label: 'Max Term', type: 'number', value: 1 },
-//     { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent', step: '0.01', value: 0 },
-// ];
-
-
-// export const TERM_CONTROLLER_DATA = [
-//     {id: '1', roomType: 'Default', maxTerm: 6, rate: 0},
-//     {id: '2', roomType: 'Default', maxTerm: 9999, rate: -0.15},
-//     {id: '3', roomType: 'Luxury', maxTerm: 9999, rate: -0.10},
-// ];
 
 // -----------------------------------
 // term rates

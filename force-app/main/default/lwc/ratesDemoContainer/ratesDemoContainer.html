@@ -5,6 +5,13 @@
             <!-- Card Body -->
             <!-- tabset -->
             <lightning-tabset variant="scoped">
+                <lightning-tab label="Basic Prices">
+                    <c-rates-demo-settings
+                        table-data={priceData}
+                        table-columns={priceColumns}
+                        record-fields={priceFields}
+                    ></c-rates-demo-settings>
+                </lightning-tab>
                 <lightning-tab label="Capacity Rates">
                     <c-rates-demo-settings
                         table-data={capacityControllerData}
@@ -38,8 +45,10 @@
     </lightning-card>    
     <!-- Calculator Card -->  
     <c-rates-demo-calculator
-        room-types={roomTypes}
+        room-types={roomTypesForRecord}
         guest-types={guestTypes}
+        booking-summary={bookingSummary}
+        oncalculate = {handleCalculate}
     ></c-rates-demo-calculator>
 
 </template>
