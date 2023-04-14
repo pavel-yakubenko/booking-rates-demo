@@ -141,12 +141,12 @@ export default class RatesDemoContainer extends LightningElement {
             }
         }
 
-        console.log('-- matching settings --');
-        console.log(JSON.stringify(settings));
-        console.log('-- by room type --');
-        console.log(JSON.stringify(setting));
-        console.log('-- default --');
-        console.log(JSON.stringify(settingDefault));
+        // console.log('-- matching settings --');
+        // console.log(JSON.stringify(settings));
+        // console.log('-- by room type --');
+        // console.log(JSON.stringify(setting));
+        // console.log('-- default --');
+        // console.log(JSON.stringify(settingDefault));
         
         return setting ? setting.rate : settingDefault ? settingDefault.rate : 0;
     }
@@ -155,21 +155,38 @@ export default class RatesDemoContainer extends LightningElement {
         // calc rates for each day of period, take average
         const startDate = Date.parse( bookingProp.startDate );
         const endDate = Date.parse( bookingProp.endDate );
-        return 0;
-        // const param = {
-        //     startDate: startDate,
-        //     endDate: endDate,
-        //     roomType: bookingProp.roomType,
-        //     defaultRoomType: this.defaultRoomType,
-        // };
-        // function filter(e) {
-        //     if ( e.roomType != this.roomType && e.roomType != this.defaultRoomType ) return false;
-        //     if ( Date.parse( e.startDate ) < this.startDate ) return false;
-        //     if ( Date.parse( e.endDate ) > this.endDate ) return false;
-        //     return  true;
-        // }
-        // const settings = this.periodControllerData.filter( filter, param );
-        // return this.getRate( settings, bookingProp );
+        const dayLen = 1000*60*60*24;
+        // list of booking dates 
+        const days = [startDate];
+        let nextDate = startDate + dayLen;
+        while ( nextDate < endDate ) {
+            days.push(nextDate);
+            nextDate += dayLen;
+        }
+
+        // resulting rate to be calculated
+        let rate = 0;
+        // getting rate for each day
+        for (const day of days) {
+            const param = {
+                date: day,
+                roomType: bookingProp.roomType,
+                defaultRoomType: this.defaultRoomType,
+            };
+            function filter(e) {
+                if ( e.roomType != this.roomType && e.roomType != this.defaultRoomType ) return false;
+                if ( Date.parse( e.startDate ) > this.date ) return false;
+                if ( Date.parse( e.endDate ) < this.date ) return false;
+                return  true;
+            }
+            const settings = this.periodControllerData.filter( filter, param );
+            const curRate = parseFloat( this.getRate( settings, bookingProp ) );
+            rate += curRate;
+            console.log( 'rate for ' + new Date(day).toDateString() + ' = ' + curRate );
+        }
+        // return average rate
+        console.log( 'rate for period = ' + (rate/days.length) );
+        return rate/days.length;
     }
 
     getPrice( bookingProp ) {

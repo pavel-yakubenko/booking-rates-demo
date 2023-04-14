@@ -1,64 +1,69 @@
 <template>
-    <!-- Region with settings -->
-    <lightning-card  title="Rates Settings">
-        <div class="slds-p-horizontal_small">
-            <!-- Card Body -->
-            <!-- tabset -->
-            <lightning-tabset variant="scoped">
-                <lightning-tab label="Basic Prices">
-                    <c-rates-demo-settings
-                        table-data={priceData}
-                        table-columns={priceColumns}
-                        record-fields={priceFields}
-                        table-name="priceData"
-                        onpricedatachange={handleTableDataChange}
-                    ></c-rates-demo-settings>
-                </lightning-tab>
-                <lightning-tab label="Capacity Rates">
-                    <c-rates-demo-settings
-                        table-data={capacityControllerData}
-                        table-columns={capacityControllerColumns}
-                        record-fields={capacityControllerFields}
-                        table-name="capacityControllerData"
-                        oncapacitycontrollerdatachange={handleTableDataChange}
-                    ></c-rates-demo-settings>
-                </lightning-tab>
-                <lightning-tab label="Term Rates">
-                    <c-rates-demo-settings
-                        table-data={termControllerData}
-                        table-columns={termControllerColumns}
-                        record-fields={termControllerFields}
-                        table-name="termControllerData"
-                        ontermcontrollerdatachange={handleTableDataChange}
-                    ></c-rates-demo-settings>
-                </lightning-tab>
-                <lightning-tab label="Period Rates">
-                    <c-rates-demo-settings
-                        table-data={periodControllerData}
-                        table-columns={periodControllerColumns}
-                        record-fields={periodControllerFields}
-                        table-name="periodControllerData"
-                        onperiodcontrollerdatachange={handleTableDataChange}
-                    ></c-rates-demo-settings>
-                </lightning-tab>
-                <lightning-tab label="Guest Type Rates">
-                    <c-rates-demo-settings
-                        table-data={guestTypeControllerData}
-                        table-columns={guestTypeControllerColumns}
-                        record-fields={guestTypeControllerFields}
-                        table-name="guestTypeControllerData"
-                        onguesttypecontrollerdatachange={handleTableDataChange}
-                    ></c-rates-demo-settings>
-                </lightning-tab>
-            </lightning-tabset>    
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_2-of-3">
+            <!-- Region with settings -->
+            <lightning-card  title="Rates Settings">
+                <div class="slds-p-horizontal_small">
+                    <!-- Card Body -->
+                    <!-- tabset -->
+                    <lightning-tabset variant="scoped">
+                        <lightning-tab label="Basic Prices">
+                            <c-rates-demo-settings
+                                table-data={priceData}
+                                table-columns={priceColumns}
+                                record-fields={priceFields}
+                                table-name="priceData"
+                                onpricedatachange={handleTableDataChange}
+                            ></c-rates-demo-settings>
+                        </lightning-tab>
+                        <lightning-tab label="Capacity Rates">
+                            <c-rates-demo-settings
+                                table-data={capacityControllerData}
+                                table-columns={capacityControllerColumns}
+                                record-fields={capacityControllerFields}
+                                table-name="capacityControllerData"
+                                oncapacitycontrollerdatachange={handleTableDataChange}
+                            ></c-rates-demo-settings>
+                        </lightning-tab>
+                        <lightning-tab label="Term Rates">
+                            <c-rates-demo-settings
+                                table-data={termControllerData}
+                                table-columns={termControllerColumns}
+                                record-fields={termControllerFields}
+                                table-name="termControllerData"
+                                ontermcontrollerdatachange={handleTableDataChange}
+                            ></c-rates-demo-settings>
+                        </lightning-tab>
+                        <lightning-tab label="Period Rates">
+                            <c-rates-demo-settings
+                                table-data={periodControllerData}
+                                table-columns={periodControllerColumns}
+                                record-fields={periodControllerFields}
+                                table-name="periodControllerData"
+                                onperiodcontrollerdatachange={handleTableDataChange}
+                            ></c-rates-demo-settings>
+                        </lightning-tab>
+                        <lightning-tab label="Guest Type Rates">
+                            <c-rates-demo-settings
+                                table-data={guestTypeControllerData}
+                                table-columns={guestTypeControllerColumns}
+                                record-fields={guestTypeControllerFields}
+                                table-name="guestTypeControllerData"
+                                onguesttypecontrollerdatachange={handleTableDataChange}
+                            ></c-rates-demo-settings>
+                        </lightning-tab>
+                    </lightning-tabset>    
+                </div>
+            </lightning-card>    
         </div>
-    </lightning-card>    
-    <!-- Calculator Card -->  
-    <c-rates-demo-calculator
-        room-types={roomTypesForRecord}
-        guest-types={guestTypes}
-        booking-summary={bookingSummary}
-        oncalculate = {handleCalculate}
-    ></c-rates-demo-calculator>
-
+        <div class="slds-col slds-size_1-of-3">
+            <!-- Calculator Card -->  
+            <c-rates-demo-calculator
+                room-types={roomTypesForRecord}
+                guest-types={guestTypes}
+                booking-summary={bookingSummary}
+                oncalculate = {handleCalculate}
+            ></c-rates-demo-calculator>
+        </div>
+    </div>
 </template>

@@ -134,7 +134,7 @@ export const PERIOD_CONTROLLER_FIELDS = [
 
 export const PERIOD_CONTROLLER_DATA = [
     {id: '0', roomType: 'Default', startDate: '2023-01-01', endDate: '2023-03-31', rate: -0.15},
-    {id: '1', roomType: 'Default', startDate: '2023-04-01', endDate: '2023-09-30', rate: 0},
+    {id: '1', roomType: 'Default', startDate: '2023-04-01', endDate: '2023-09-30', rate: 0.5},
 ];
 
 // ------------------------------------------
