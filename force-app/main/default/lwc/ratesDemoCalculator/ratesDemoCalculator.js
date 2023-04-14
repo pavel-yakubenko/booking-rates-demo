@@ -6,7 +6,7 @@ export default class RatesDemoCalculator extends LightningElement {
     @api guestTypes;
     roomTypeSelected;
     guestTypeSelected;
-    guestCount;
+    guestCount=2;
     startDate;
     endDate;
     // guestType;

@@ -1,8 +1,9 @@
 import { LightningElement, track, api } from 'lwc';
 import RatesDemoSettingModal from 'c/ratesDemoSettingModal';
 
-export default class RatesDemoControllerCapacity extends LightningElement {
+export default class RatesDemoSettings extends LightningElement {
 
+    @api tableName;
     @api tableData;
     @api tableColumns;
     @api recordFields;
@@ -30,6 +31,7 @@ export default class RatesDemoControllerCapacity extends LightningElement {
             const rows = this.tableData.slice(); // copy of table data
             rows.splice( index, 1 ); // delete index
             this.tableData = rows; // assign new data to table data
+            this.notifyDataChange();
         }
     }
 
@@ -47,10 +49,11 @@ export default class RatesDemoControllerCapacity extends LightningElement {
             const rows = this.tableData.slice(); // copy of table data
             rows.splice( index, 1, result ); // update index
             this.tableData = rows; // assign new data to table data
+            this.notifyDataChange();
         }
     }
 
-    async addRow( event ) {
+    async addRow() {
         const fields = this.getFieldsForModal();
         
         const result = await RatesDemoSettingModal.open({
@@ -61,6 +64,7 @@ export default class RatesDemoControllerCapacity extends LightningElement {
         if( result ) {
             result.id = this.nextIndex++;
             this.tableData = this.tableData.concat( JSON.parse( JSON.stringify( result ) ) );
+            this.notifyDataChange();
         }
     }
 
@@ -76,6 +80,7 @@ export default class RatesDemoControllerCapacity extends LightningElement {
             if( result ) {
                 result.id = this.nextIndex++;
                 this.tableData = this.tableData.concat( JSON.parse( JSON.stringify( result ) ) );
+                this.notifyDataChange();
             }
         }
     }
@@ -95,5 +100,16 @@ export default class RatesDemoControllerCapacity extends LightningElement {
         }
         return fields;
     }
+
+    notifyDataChange() {
+        // return changed data to parent
+        this.dispatchEvent( 
+            new CustomEvent( 
+                this.tableName.toLowerCase()+'change',
+                { detail: { tableName: this.tableName, tableData: this.tableData } } 
+            ) 
+        );
+    }
+
 
 }

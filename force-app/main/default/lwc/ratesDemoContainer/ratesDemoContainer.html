@@ -10,6 +10,8 @@
                         table-data={priceData}
                         table-columns={priceColumns}
                         record-fields={priceFields}
+                        table-name="priceData"
+                        onpricedatachange={handleTableDataChange}
                     ></c-rates-demo-settings>
                 </lightning-tab>
                 <lightning-tab label="Capacity Rates">
@@ -17,6 +19,8 @@
                         table-data={capacityControllerData}
                         table-columns={capacityControllerColumns}
                         record-fields={capacityControllerFields}
+                        table-name="capacityControllerData"
+                        oncapacitycontrollerdatachange={handleTableDataChange}
                     ></c-rates-demo-settings>
                 </lightning-tab>
                 <lightning-tab label="Term Rates">
@@ -24,6 +28,8 @@
                         table-data={termControllerData}
                         table-columns={termControllerColumns}
                         record-fields={termControllerFields}
+                        table-name="termControllerData"
+                        ontermcontrollerdatachange={handleTableDataChange}
                     ></c-rates-demo-settings>
                 </lightning-tab>
                 <lightning-tab label="Period Rates">
@@ -31,6 +37,8 @@
                         table-data={periodControllerData}
                         table-columns={periodControllerColumns}
                         record-fields={periodControllerFields}
+                        table-name="periodControllerData"
+                        onperiodcontrollerdatachange={handleTableDataChange}
                     ></c-rates-demo-settings>
                 </lightning-tab>
                 <lightning-tab label="Guest Type Rates">
@@ -38,6 +46,8 @@
                         table-data={guestTypeControllerData}
                         table-columns={guestTypeControllerColumns}
                         record-fields={guestTypeControllerFields}
+                        table-name="guestTypeControllerData"
+                        onguesttypecontrollerdatachange={handleTableDataChange}
                     ></c-rates-demo-settings>
                 </lightning-tab>
             </lightning-tabset>    
