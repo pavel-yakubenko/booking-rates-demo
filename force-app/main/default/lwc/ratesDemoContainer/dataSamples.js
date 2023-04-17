@@ -57,7 +57,7 @@ export const PRICE_DATA = [
 export const CAPACITY_CONTROLLER_COLUMNS = [
     { label: 'Room Type', fieldName: 'roomType' },
     { label: 'Guest Count', fieldName: 'guestCount', type: 'number' },
-    { label: 'Rate', fieldName: 'rate', type: 'percent' },
+    { label: 'Rate', fieldName: 'rate', type: 'percent', typeAttributes: { maximumFractionDigits: '2' } },
     {
         type: 'action',
         typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
@@ -67,7 +67,7 @@ export const CAPACITY_CONTROLLER_COLUMNS = [
 export const CAPACITY_CONTROLLER_FIELDS = [
     { isPicklist: true, name: 'roomType', label: 'Room Type', type: '', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
     { isInput: true, name: 'guestCount', label: 'Guest Count', type: 'number', value: 1 },
-    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent', step: '0.01', value: 0 },
+    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent-fixed', step: '0.01', value: 0 },
 ];
 
 
@@ -89,7 +89,7 @@ export const TERM_CONTROLLER_COLUMNS = [
     { label: 'Room Type', fieldName: 'roomType' },
     { label: 'Week Day', fieldName: 'weekday', type: 'string' },
     { label: 'Stay for', fieldName: 'term', type: 'number' },
-    { label: 'Rate', fieldName: 'rate', type: 'percent' },
+    { label: 'Rate', fieldName: 'rate', type: 'percent', typeAttributes: { maximumFractionDigits: '2' } },
     {
         type: 'action',
         typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
@@ -100,7 +100,7 @@ export const TERM_CONTROLLER_FIELDS = [
     { isPicklist: true, name: 'roomType', label: 'Room Type', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
     { isMultiPicklist: true, name: 'weekday', label: 'Week Day', value: [WEEKDAYS[0].value], options: WEEKDAYS },
     { isInput: true, name: 'term', label: 'Stay for', type: 'number', value: 1 },
-    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent', step: '0.01', value: 0 },
+    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent-fixed', step: '0.01', value: 0 },
 ];
 
 
@@ -117,7 +117,7 @@ export const PERIOD_CONTROLLER_COLUMNS = [
     { label: 'Room Type', fieldName: 'roomType' },
     { label: 'Start Date', fieldName: 'startDate', type: 'date' },
     { label: 'End Date', fieldName: 'endDate', type: 'date' },
-    { label: 'Rate', fieldName: 'rate', type: 'percent' },
+    { label: 'Rate', fieldName: 'rate', type: 'percent', typeAttributes: { maximumFractionDigits: '2' } },
     {
         type: 'action',
         typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
@@ -128,7 +128,7 @@ export const PERIOD_CONTROLLER_FIELDS = [
     { isPicklist: true, name: 'roomType', label: 'Room Type', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
     { isInput: true, name: 'startDate', label: 'Start Date', type: 'date' },
     { isInput: true, name: 'endDate', label: 'End Date', type: 'date' },
-    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent', step: '0.01', value: 0 },
+    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent-fixed', step: '0.01', value: 0 },
 ];
 
 
@@ -143,7 +143,7 @@ export const PERIOD_CONTROLLER_DATA = [
 export const GUESTTYPE_CONTROLLER_COLUMNS = [
     { label: 'Room Type', fieldName: 'roomType' },
     { label: 'Guest Type', fieldName: 'guestType'},
-    { label: 'Rate', fieldName: 'rate', type: 'percent' },
+    { label: 'Rate', fieldName: 'rate', type: 'percent', typeAttributes: { maximumFractionDigits: '2' } },
     {
         type: 'action',
         typeAttributes: { rowActions: CONTROLLER_TABLE_ACTIONS },
@@ -153,7 +153,7 @@ export const GUESTTYPE_CONTROLLER_COLUMNS = [
 export const GUESTTYPE_CONTROLLER_FIELDS = [
     { isPicklist: true, name: 'roomType', label: 'Room Type', type: '', value: ROOM_TYPES[0].value, options: ROOM_TYPES },
     { isPicklist: true, name: 'guestType', label: 'Guest Type', type: '', value: GUEST_TYPES[0].value, options: GUEST_TYPES },
-    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent', step: '0.01', value: 0 },
+    { isInput: true, name: 'rate', label: 'Rate', type: 'number', formatter: 'percent-fixed', step: '0.01', value: 0 },
 ];
 
 

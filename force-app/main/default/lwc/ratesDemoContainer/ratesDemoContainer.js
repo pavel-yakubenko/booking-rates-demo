@@ -62,26 +62,26 @@ export default class RatesDemoContainer extends LightningElement {
             }
         }
 
-        // console.log('-- matching settings --');
-        // console.log(JSON.stringify(settings));
-        // console.log('-- by room type --');
-        // console.log(JSON.stringify(setting));
-        // console.log('-- default --');
-        // console.log(JSON.stringify(settingDefault));
+        console.log('-- matching settings --');
+        console.log(JSON.stringify(settings));
+        console.log('-- by room type --');
+        console.log(JSON.stringify(setting));
+        console.log('-- default --');
+        console.log(JSON.stringify(settingDefault));
         
         return setting ? setting.rate : settingDefault ? settingDefault.rate : 0;
     }
 
     getCapacityRate( bookingProp ) {
         const param = {
-            guestCount: bookingProp.guestCount,
+            guestCount: parseInt(bookingProp.guestCount),
             roomType: bookingProp.roomType,
             defaultRoomType: this.defaultRoomType,
         };
         function filter(e) {
             return e.guestCount == this.guestCount && (e.roomType == this.roomType || e.roomType == this.defaultRoomType);
         }
-        const settings = this.guestTypeControllerData.filter( filter, param );
+        const settings = this.capacityControllerData.filter( filter, param );
         return this.getRate( settings, bookingProp );
     }
 

@@ -92,6 +92,8 @@ export default class RatesDemoSettings extends LightningElement {
                 if ( row[ field.name ] ) {
                     if ( field.isMultiPicklist ) {
                         field.value = row[ field.name ].split(',');
+                    } else if (field.formatter == 'percent-fixed') {
+                        field.value = row[ field.name ]*100;
                     } else {
                         field.value = row[ field.name ];
                     }

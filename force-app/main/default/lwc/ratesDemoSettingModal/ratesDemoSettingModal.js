@@ -16,6 +16,10 @@ export default class RatesDemoSettingModal extends LightningModal {
             if ( field.isMultiPicklist  ) {
                 this.record[ field.name ] = this.record[ field.name ].join();
             }
+            // convert fixed percents to float
+            if ( field.formatter == 'percent-fixed' ) {
+                this.record[ field.name ] = this.record[ field.name ]/100;
+            }
         }
         this.close(this.record);
     }
