@@ -27,7 +27,7 @@ export default class RatesDemoContainer extends LightningElement {
     guestTypeControllerData = GUESTTYPE_CONTROLLER_DATA;
     guestTypeControllerFields = GUESTTYPE_CONTROLLER_FIELDS;
 
-    @track bookingSummary = 'Select smth...';
+    @track bookingSummary;
 
     handleTableDataChange( event ) {
         this[event.detail.tableName] = event.detail.tableData;
@@ -62,12 +62,12 @@ export default class RatesDemoContainer extends LightningElement {
             }
         }
 
-        console.log('-- matching settings --');
-        console.log(JSON.stringify(settings));
-        console.log('-- by room type --');
-        console.log(JSON.stringify(setting));
-        console.log('-- default --');
-        console.log(JSON.stringify(settingDefault));
+        // console.log('-- matching settings --');
+        // console.log(JSON.stringify(settings));
+        // console.log('-- by room type --');
+        // console.log(JSON.stringify(setting));
+        // console.log('-- default --');
+        // console.log(JSON.stringify(settingDefault));
         
         return setting ? setting.rate : settingDefault ? settingDefault.rate : 0;
     }
@@ -186,38 +186,51 @@ export default class RatesDemoContainer extends LightningElement {
         }
         // return average rate
         console.log( 'rate for period = ' + (rate/days.length) );
-        return rate/days.length;
+        return (rate/days.length).toFixed(2);
     }
 
     getPrice( bookingProp ) {
 
+        const startDate = new Date( bookingProp.startDate );
+        const endDate = new Date( bookingProp.endDate );
+        const term = (endDate.getTime() - startDate.getTime())/(1000*60*60*24);
+
         // get basic price
         console.log( '-- basic price --' );
-        let price = parseFloat( this.getBasicPrice( bookingProp ) );
-        let rate = 0;
+        const basicPrice = parseFloat( this.getBasicPrice( bookingProp ) );
+
 
         // get capacity rate
         console.log( '-- capacity rate --' );
-        rate = parseFloat( this.getCapacityRate( bookingProp ) );
-        price = price * ( 1 + rate );
+        const capacityRate = parseFloat( this.getCapacityRate( bookingProp ) );
 
         // get guest type rate
         console.log( '-- guest type rate --' );
-        rate = parseFloat( this.getGuestTypeRate( bookingProp ) );
-        price = price * ( 1 + rate );
+        const guestTypeRate = parseFloat( this.getGuestTypeRate( bookingProp ) );
 
         // get term rate
         console.log( '-- term rate --' );
-        rate = parseFloat( this.getTermRate( bookingProp ) );
-        price = price * ( 1 + rate );
+        const termRate = parseFloat( this.getTermRate( bookingProp ) );
 
         // get period rate
         console.log( '-- period rate --' );
-        rate = parseFloat( this.getPeriodRate( bookingProp ) );
-        price = price * ( 1 + rate );
+        const periodRate = parseFloat( this.getPeriodRate( bookingProp ) );
+
+        // price per night as basic price with all rates applied
+        const pricePerNight = basicPrice*(1+capacityRate)*(1+guestTypeRate)*(1+termRate)*(1+periodRate);
+
+        const bookingSummary = {};
+        bookingSummary.basicPrice        = basicPrice.toFixed(2);
+        bookingSummary.capacityRate      = (capacityRate*100).toFixed(2);
+        bookingSummary.guestTypeRate     = (guestTypeRate*100).toFixed(2);
+        bookingSummary.termRate          = (termRate*100).toFixed(2);
+        bookingSummary.periodRate        = (periodRate*100).toFixed(2);
+        bookingSummary.pricePerNight     = pricePerNight.toFixed(2);
+        bookingSummary.nights            = term;
+        bookingSummary.pricePerPeriod    = (pricePerNight*term).toFixed(2);
 
         // return result
-        return price.toFixed(2);
+        return bookingSummary;
     }
 
     handleCalculate( event ) {
@@ -227,16 +240,9 @@ export default class RatesDemoContainer extends LightningElement {
 
         const bookingProp = event.detail;
 
-        const price = this.getPrice( bookingProp );
+        const bookingSummary = this.getPrice( bookingProp );
         
-        const result = '' +
-        'Room type = ' + this.roomTypes.find( e => e.value == bookingProp.roomType ).label + '; ' +
-        'Guests = ' + bookingProp.guestCount + '; ' +
-        'Period = ' + bookingProp.startDate + ' - ' + bookingProp.endDate +'; '+
-        'Guest type = ' + this.guestTypes.find( e => e.value == bookingProp.guestType ).label + '; ' +
-        'Price = ' + price;
-
-        this.bookingSummary = result;
+        this.bookingSummary = bookingSummary;
     }
 
 }

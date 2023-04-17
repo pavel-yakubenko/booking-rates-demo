@@ -40,10 +40,21 @@
             </div>
             
         </div>
-        <div slot="footer">
+        <div slot="footer" class="slds-text-align_left">
             <template if:true={bookingSummary}>
-                <div>Booking summary: </div>
-                <div>{bookingSummary}</div>
+                <div class="slds-text-heading_medium slds-var-m-bottom_small">Booking summary: </div>
+                <ul>
+                    <li><b>Basic price: ${bookingSummary.basicPrice}</b></li>
+                    <li>Capacity rate: {bookingSummary.capacityRate}%</li>
+                    <li>Guest type rate: {bookingSummary.guestTypeRate}%</li>
+                    <li>Term rate: {bookingSummary.termRate}%</li>
+                    <li>Period rate: {bookingSummary.periodRate}%</li>
+                    <li><b>Price per night: ${bookingSummary.pricePerNight}</b></li>
+                    <li><b>Price for {bookingSummary.nights} nights: ${bookingSummary.pricePerPeriod}</b></li>
+                </ul>
+            </template>
+            <template if:false={bookingSummary}>
+                <div>Book something...</div>
             </template>
         </div>
     </lightning-card>       
