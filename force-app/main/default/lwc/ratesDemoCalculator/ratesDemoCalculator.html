@@ -1,0 +1,61 @@
+<template>
+    <lightning-card  title="Booking Calculator">
+        <div class="slds-var-p-horizontal_small">
+            <!-- Room type selection -->
+            <lightning-combobox
+                class="slds-size_medium"
+                name="roomTypeSelected"
+                label="Room Type"
+                value={roomTypeSelected}
+                placeholder="Select Room Type"
+                options={roomTypes}
+                onchange={handleChange}
+            ></lightning-combobox>
+            <!-- guest count -->
+            <lightning-input
+                type="number" name="guestCount" label="Guests count" value={guestCount} onchange={handleChange} class="slds-size_medium"
+            ></lightning-input>
+            <!-- period -->
+            <div class="slds-grid slds-size_medium">
+                <div class="slds-col" style="padding-left:0">
+                    <lightning-input type="date" name="startDate" label="Start date" value={startDate} onchange={handleChange}></lightning-input>
+                </div>
+                <div class="slds-col" style="padding-right:0">
+                    <lightning-input type="date" name="endDate" label="End date"  value={endDate} onchange={handleChange}></lightning-input>
+                </div>
+            </div>
+            <!-- guest type -->
+            <lightning-combobox
+                class="slds-size_medium"
+                name="guestTypeSelected"
+                label="Guest Type"
+                value={guestTypeSelected}
+                placeholder="Select Guest Type"
+                options={guestTypes}
+                onchange={handleChange}
+            ></lightning-combobox>
+            <!-- submit -->
+            <div class="slds-var-m-top_x-small">
+                <lightning-button variant="brand" label="Calculate" title="Calculate rate" onclick={handleCalculate}></lightning-button>
+            </div>
+            
+        </div>
+        <div slot="footer" class="slds-text-align_left">
+            <template if:true={bookingSummary}>
+                <div class="slds-text-heading_medium slds-var-m-bottom_small">Booking summary: </div>
+                <ul>
+                    <li><b>Basic price: ${bookingSummary.basicPrice}</b></li>
+                    <li>Capacity rate: {bookingSummary.capacityRate}%</li>
+                    <li>Guest type rate: {bookingSummary.guestTypeRate}%</li>
+                    <li>Term rate: {bookingSummary.termRate}%</li>
+                    <li>Period rate: {bookingSummary.periodRate}%</li>
+                    <li><b>Price per night: ${bookingSummary.pricePerNight}</b></li>
+                    <li><b>Price for {bookingSummary.nights} nights: ${bookingSummary.pricePerPeriod}</b></li>
+                </ul>
+            </template>
+            <template if:false={bookingSummary}>
+                <div>Book something...</div>
+            </template>
+        </div>
+    </lightning-card>       
+</template>

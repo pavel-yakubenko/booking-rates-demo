@@ -1,0 +1,45 @@
+<template>
+    <lightning-modal-header label={label}></lightning-modal-header>
+    <lightning-modal-body>
+        <template for:each={fields} for:item="field">
+            <template if:true={field.isMultiPicklist}>
+                <lightning-dual-listbox
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    value={field.value}
+                    source-label="Available"
+                    selected-label="Selected"
+                    options={field.options}
+                    onchange={handleChange}
+                ></lightning-dual-listbox>            
+            </template>
+            <template if:true={field.isPicklist}>
+                <lightning-combobox
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    value={field.value}
+                    options={field.options}
+                    onchange={handleChange}
+                ></lightning-combobox>
+            </template>
+            <template if:true={field.isInput}>
+                <lightning-input
+                    key={field.name}
+                    name={field.name}
+                    type={field.type}
+                    formatter={field.formatter}
+                    step={field.step}
+                    label={field.label}
+                    value={field.value}
+                    onchange={handleChange}
+                ></lightning-input>
+            </template>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Save" onclick={handleSave}></lightning-button>
+        <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+    </lightning-modal-footer>
+</template>
